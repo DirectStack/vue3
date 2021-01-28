@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1  ref="root">{{ msg }}</h1>
+    <h3 v-if="userGeolocation">userGeolocation:{{ userGeolocation }}</h3>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -37,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, toRef } from 'vue'
+import { defineComponent, ref, toRefs, toRef, inject, onMounted } from 'vue'
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -46,6 +47,13 @@ export default defineComponent({
   },
   setup (props: any) {
     console.error(this) // 输出 undefined
+    // res钩子，引用组件
+    const root = ref(null)
+
+    onMounted(() => {
+      // DOM元素将在初始渲染后分配给ref
+      console.log(root.value) // <h1>这是根元素</h1>
+    })
 
     // 响应引用
     const { msg } = toRefs(props)
@@ -54,12 +62,19 @@ export default defineComponent({
     const title = toRef(props, 'title')
     console.log(`title：${title.value}`)
 
+    // inject
+    const userGeolocation = inject('geolocation')
+
     function test (x: number): string {
       return props.toString()
     }
     const a = test(1)
     console.log(a)
     console.log(msg.value)
+    return {
+      userGeolocation,
+      root
+    }
   }
 })
 </script>
