@@ -37,16 +37,21 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component'
+import { defineComponent } from 'vue'
 
-@Options({
+export default defineComponent({
+  name: 'HelloWorld',
   props: {
     msg: String
+  },
+  setup (props: any) {
+    function test (x: number): string {
+      return props.toString()
+    }
+    const a = test(1)
+    console.log(a)
   }
 })
-export default class HelloWorld extends Vue {
-  msg!: string
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
