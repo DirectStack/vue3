@@ -16,6 +16,7 @@ export default defineComponent({
     HelloWorld
   },
   setup () {
+    // ref基本数据类型
     const count = ref(0)
     const increase = (): void => {
       count.value++
@@ -32,6 +33,7 @@ export default defineComponent({
     })
 
     // provide
+    // reactive引用类型
     const geolocation = reactive({
       longitude: 90,
       latitude: 135

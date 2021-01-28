@@ -55,7 +55,7 @@ export default defineComponent({
       console.log(root.value) // <h1>这是根元素</h1>
     })
 
-    // 响应引用
+    // 解构响应引用
     const { msg } = toRefs(props)
 
     // 可选的响应引用
