@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, onUpdated, onUnmounted } from 'vue'
+import { defineComponent, ref, watch, computed, onMounted, onUpdated, onUnmounted } from 'vue'
 
 export default defineComponent({
   name: 'About',
@@ -15,6 +15,16 @@ export default defineComponent({
     const increase = (): void => {
       count.value++
     }
+    // watch
+    watch(count, (newValue, oldValue) => {
+      console.log('The new count value is: ' + count.value)
+    })
+
+    // computed
+    const increaseCount = computed(() => {
+      const newVal = count.value + 1
+      return newVal
+    })
     // 生命周期
     onMounted(() => {
       console.log('mounted vue3 typescript')
@@ -27,6 +37,7 @@ export default defineComponent({
     })
     // 暴露给模板
     return {
+      increaseCount,
       count,
       increase
     }

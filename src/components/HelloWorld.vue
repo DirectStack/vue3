@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, toRefs, toRef } from 'vue'
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -45,11 +45,21 @@ export default defineComponent({
     msg: String
   },
   setup (props: any) {
+    console.error(this) // 输出 undefined
+
+    // 响应引用
+    const { msg } = toRefs(props)
+
+    // 可选的响应引用
+    const title = toRef(props, 'title')
+    console.log(`title：${title.value}`)
+
     function test (x: number): string {
       return props.toString()
     }
     const a = test(1)
     console.log(a)
+    console.log(msg.value)
   }
 })
 </script>
